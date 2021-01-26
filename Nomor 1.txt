@@ -1,0 +1,27 @@
+1.
+SELECT ID AS id, Name, CountryCode, District, SUM(Population) AS Population
+FROM city
+WHERE countryCode LIKE 'IDN'
+GROUP BY id;
+
+2.
+SELECT ID AS id, Name AS Nama_kota, District, SUM(Population) AS Population
+FROM city
+GROUP BY Nama_kota
+ORDER BY Population DESC;
+
+3.
+SELECT cl.CountryCode AS Code, c.Name, cl.Language, cl.IsOfficial, cl.Percentage
+FROM countrylanguage cl
+    JOIN country c
+    ON cl.CountryCode = c.Code
+WHERE (cl.Language = 'English') AND (cl.isOfficial = 'T')
+ORDER BY cl.Percentage DESC
+LIMIT 10;
+
+4.
+SELECT Name, Continent, LifeExpectancy, GNP
+FROM country
+WHERE (Continent = 'Asia') AND(LifeExpectancy > (SELECT AVG(LifeExpectancy) FROM country WHERE Continent = 'Europe'))
+ORDER BY LifeExpectancy DESC
+LIMIT 10;
